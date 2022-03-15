@@ -22,6 +22,7 @@ contract Bank  is IBank {
         (bool success, )  = address(this).call{value: amount}("");
         require( success, "Failed to send Ether");
         accounts[msg.sender].deposit += amount;
+        accounts[msg.sender].lastInterestBlock += block.number;
 
 
         emit Deposit(msg.sender, amount);
